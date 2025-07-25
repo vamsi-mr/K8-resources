@@ -4,12 +4,12 @@ metadata:
   name: env-demo
   labels:
     purpose: demonstrate-env
-  spec:
-    containers:
-    - name : nginx
-      image: nginx
-      env:
-      - name: COURSE
-        value: KUBERNETES
-      - name: LEARNER
-        value: "MOHAN VAMSI R"
+spec:
+  containers:
+  - name : nginx
+    image: nginx
+  env:
+    - name: COURSE
+      value: KUBERNETES
+    - name: LEARNER
+      value: "MOHAN VAMSI R"
