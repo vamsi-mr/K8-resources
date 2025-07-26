@@ -6,5 +6,5 @@ metadata:
     purpose: config
     env: dev
 data:
-  COURSE: "DEVOPS"
+  COURSE: "DEVSECOPS WITH AWS"
   DURATION: "120HRS"
