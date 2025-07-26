@@ -9,6 +9,7 @@ metadata:
     environment: dev
   annotations:
     description: "This pod is created to demonstrate pod annotations"
+    ## we can keep build url and images registry. charcaters max upto 256
 spec: 
   containers:
   - name: nginx
