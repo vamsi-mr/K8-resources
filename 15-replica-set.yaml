@@ -22,7 +22,7 @@ spec:
         purpose: rs-demo
         project: roboshop
         app: nginx
-  spec:
-    containers:
-    - name: nginx
-      image: nginx:stable-perl
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:stable-perl
