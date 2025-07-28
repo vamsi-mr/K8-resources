@@ -19,7 +19,7 @@ metadata:
   name: ebs-static
 spec:
   storageClassName: ""    ## Empty string must be explicitly set otherwise default StorageClass will be set
-  VolumeName: ebs-static
+  volumeName: ebs-static
   accessModes: 
   - ReadWriteOnce
   resources:
