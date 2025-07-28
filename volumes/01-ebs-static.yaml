@@ -50,7 +50,7 @@ spec:
 
 ---
 apiVersion: v1
-kind: LoadBalancer
+kind: Service
 metadata:
   name: ebs-static
   labels:
