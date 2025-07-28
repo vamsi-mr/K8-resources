@@ -40,7 +40,7 @@ spec:
   containers:
   - name: nginx
     image: nginx
-    volulmeMounts:   ### docker run -v host-path:container-path
+    volumeMounts:   ### docker run -v host-path:container-path
     - name: persistent-storage
       mountPath: /usr/share/nginx/html
   volumes:
