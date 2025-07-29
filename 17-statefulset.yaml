@@ -12,10 +12,10 @@ spec:
   ports:
   - port: 80
     name: web
-  cluserIP: None
+  clusterIP: None
 
 ---
-apiVersion: app/v1
+apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: sc-headless
