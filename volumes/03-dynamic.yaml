@@ -20,7 +20,7 @@ metadata:
     project: roboshop
 spec:
   nodeSelector:
-    topology.kubernetes.io/zone: us-east-1c   ## change accound instance AZ
+    topology.kubernetes.io/zone: us-east-1c   ## change according to instance AZ
   containers:
   - name: nginx
     image: nginx
