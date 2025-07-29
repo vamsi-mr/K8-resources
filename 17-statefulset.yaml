@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: sc-headless-set
+  labels:
+    purpose: stateful-set
+    project: roboshop
+spec:
+  selector:
+    purpose: stateful-set
+    project: roboshop
+  ports:
+  - port: 80
+    name: web
+  cluserIP: None
+
+---
+apiVersion: app/v1
+kind: StatefulSet
+metadata:
+  name: sc-headless
+spec:
+  selector:
+    matchLabels:
+      purpose: stateful-set
+      project: roboshop
+  serviceName: nginx    ## this should be headless service
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        purpose: stateful-set
+        project: roboshop
+    spec:
+      containers:
+      - name: nginx
+        image: nginx  
+        volumeMounts:
+        - name: www
+          mountPath: /usr/share/nginx/html
+  ###  This is nothing but PVC, we can create here directly
+  volumeClaimTemplate:
+  - metadata:
+      name: www
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      storageClassName: roboshop-ebs
+      resources:
+        requests:
+        storage: 2Gi
