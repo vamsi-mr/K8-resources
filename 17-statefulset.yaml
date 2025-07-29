@@ -43,8 +43,8 @@ spec:
   - metadata:
       name: www
     spec:
-      accessModes: [ "ReadWriteMany" ]
-      storageClassName: efs-roboshop
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: roboshop-ebs
       resources:
         requests:
           storage: 2Gi
