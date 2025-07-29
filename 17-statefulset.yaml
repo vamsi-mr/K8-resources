@@ -39,7 +39,7 @@ spec:
         - name: www
           mountPath: /usr/share/nginx/html
   ###  This is nothing but PVC, we can create here directly
-  volumeClaimTemplate:
+  volumeClaimTemplates:
   - metadata:
       name: www
     spec:
