@@ -9,7 +9,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   storageClassName: ""   ## it should be empty in static provisioning
-  persistentVolumeReClaimPolicy: Retain
+  persistentVolumeReclaimPolicy: Retain
   csi:
     driver: efs.csi.aws.com
     volumeHandle: fs-0a6c7f0e8eeb825cb
