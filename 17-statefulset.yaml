@@ -43,7 +43,7 @@ spec:
   - metadata:
       name: www
     spec:
-      accessModes: [ "ReadWriteOnce" ]
+      accessModes: [ "ReadWriteMany" ]
       storageClassName: efs-roboshop
       resources:
         requests:
