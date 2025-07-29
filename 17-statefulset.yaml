@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: sc-headless-set
+  name: ngnix-headless-svc
   labels:
-    purpose: stateful-set
+    purpose: statefulset
     project: roboshop
 spec:
   selector:
@@ -18,18 +18,18 @@ spec:
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: sc-headless
+  name: nginx-statefulset
 spec:
   selector:
     matchLabels:
-      purpose: stateful-set
+      purpose: statefulset   ### this should match .spec.template.metadata.labels
       project: roboshop
-  serviceName: sc-headless-set    ## this should be headless service
+  serviceName: ngnix-headless-svc    ## this should be headless service
   replicas: 3
   template:
     metadata:
       labels:
-        purpose: stateful-set
+        purpose: statefulset
         project: roboshop
     spec:
       containers:
