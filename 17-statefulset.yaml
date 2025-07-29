@@ -24,7 +24,7 @@ spec:
     matchLabels:
       purpose: stateful-set
       project: roboshop
-  serviceName: nginx    ## this should be headless service
+  serviceName: sc-headless-set    ## this should be headless service
   replicas: 3
   template:
     metadata:
@@ -44,7 +44,7 @@ spec:
       name: www
     spec:
       accessModes: [ "ReadWriteOnce" ]
-      storageClassName: roboshop-ebs
+      storageClassName: efs-roboshop
       resources:
         requests:
           storage: 2Gi
