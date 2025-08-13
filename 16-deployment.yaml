@@ -1,70 +1,14 @@
-# apiVersion: apps/v1
-# kind: Deployment
-# metadata:
-#   name: nginx-blue
-#   namespace: roboshop
-#   ## Deployment labels
-#   labels:
-#     purpose: blue-green-deployement
-#     project: roboshop
-#     app: nginx
-#     version: blue
-# spec:
-#   replicas: 5
-#   ## these are the labels replica set use to create pod replicas, this should match pod labels
-#   selector:
-#     matchLabels:
-#       purpose: blue-green-deployement
-#       project: roboshop
-#       app: nginx
-#       version: blue
-#   ## This is pod definition
-#   template:
-#     metadata:
-#       labels:
-#         purpose: blue-green-deployement
-#         project: roboshop
-#         app: nginx
-#         version: blue
-#     spec:
-#       containers:
-#       - name: nginx
-#         image: nginx
-
-# ---
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   name: nginx-lb
-#   namespace: roboshop
-#   labels: 
-#     purpose: blue-green-deployement
-#     project: roboshop
-#     app: nginx
-# spec:
-#   type: LoadBalancer
-#   selector:
-#     purpose: blue-green-deployement
-#     project: roboshop
-#     app: nginx
-#     version: green
-#   ports:
-#     - protocol: TCP
-#       port: 80 ## service port
-#       targetPort: 80 ## service port
-
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-green
+  name: nginx-blue
   namespace: roboshop
   ## Deployment labels
   labels:
     purpose: blue-green-deployement
     project: roboshop
     app: nginx
-    version: green
+    version: blue
 spec:
   replicas: 5
   ## these are the labels replica set use to create pod replicas, this should match pod labels
@@ -73,7 +17,7 @@ spec:
       purpose: blue-green-deployement
       project: roboshop
       app: nginx
-      version: green
+      version: blue
   ## This is pod definition
   template:
     metadata:
@@ -81,8 +25,64 @@ spec:
         purpose: blue-green-deployement
         project: roboshop
         app: nginx
-        version: green
+        version: blue
     spec:
       containers:
       - name: nginx
         image: nginx
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-lb
+  namespace: roboshop
+  labels: 
+    purpose: blue-green-deployement
+    project: roboshop
+    app: nginx
+spec:
+  type: LoadBalancer
+  selector:
+    purpose: blue-green-deployement
+    project: roboshop
+    app: nginx
+    version: blue
+  ports:
+    - protocol: TCP
+      port: 80 ## service port
+      targetPort: 80 ## service port
+
+# ---
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: nginx-green
+#   namespace: roboshop
+#   ## Deployment labels
+#   labels:
+#     purpose: blue-green-deployement
+#     project: roboshop
+#     app: nginx
+#     version: green
+# spec:
+#   replicas: 5
+#   ## these are the labels replica set use to create pod replicas, this should match pod labels
+#   selector:
+#     matchLabels:
+#       purpose: blue-green-deployement
+#       project: roboshop
+#       app: nginx
+#       version: green
+#   ## This is pod definition
+#   template:
+#     metadata:
+#       labels:
+#         purpose: blue-green-deployement
+#         project: roboshop
+#         app: nginx
+#         version: green
+#     spec:
+#       containers:
+#       - name: nginx
+#         image: nginx
