@@ -1,0 +1,78 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-index
+  namespace: roboshop
+data:
+  index.html: |
+    <html>
+      <body>
+        <h1>Welcome to Nginx Rolling Deployment</h1>
+        <p>Version: 1.19</p>
+      </body>
+    </html>
+
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-rolling
+  namespace: roboshop
+  labels:
+    purpose: rolling-deployement
+    project: roboshop
+    app: nginx
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      purpose: rolling-deployement
+      project: roboshop
+      app: nginx
+  strategy:
+    type: RollingUpdate
+    rollingUpdate: 
+      maxSurge: 1
+      maxUnavailable: 1
+  ## This is pod definition
+  template:
+    metadata:
+      labels:
+        purpose: rolling-deployement
+        project: roboshop
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.19
+        ports:
+        - containerPort: 80
+        volumeMounts:
+          - name: index-html
+            mountPath: /usr/share/nginx/html
+      volumes:
+        - name: index-html
+          configMap:
+            name: nginx-index
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-lb
+  namespace: roboshop
+  labels: 
+    purpose: rolling-deployement
+    project: roboshop
+    app: nginx
+spec:
+  type: LoadBalancer
+  selector:
+    purpose: rolling-deployement
+    project: roboshop
+    app: nginx
+  ports:
+    - protocol: TCP
+      port: 80 ## service port
+      targetPort: 80 ## service port
