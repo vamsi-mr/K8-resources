@@ -66,7 +66,7 @@ metadata:
     app: nginx
     version: green
 spec:
-  replicas: 2
+  replicas: 5
   ## these are the labels replica set use to create pod replicas, this should match pod labels
   selector:
     matchLabels:
