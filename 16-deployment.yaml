@@ -47,7 +47,7 @@ spec:
     purpose: blue-green-deployement
     project: roboshop
     app: nginx
-    version: green
+    version: blue
   ports:
     - protocol: TCP
       port: 80 ## service port
